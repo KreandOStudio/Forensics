@@ -94,6 +94,22 @@ Miha = {
 }
 
 
+def desea_salir(texto):
+    if texto == "q" or texto == "Q":
+        return True
+    else:
+        return False
+
+
+def elige_opcion(texto):
+    if texto == "s" or texto == "S":
+        return True
+    elif texto == "n" or texto == "N":
+        return False
+    else:
+        return None
+
+
 def devuelve_chungo(nom):
     if nom == "Miha":
         return Miha
@@ -272,33 +288,46 @@ def main():
     print
     print "Bienvenidos a Forensics Soft. Aplicación de comparación de ADN's. ¡Encontramos al culpable!"
 
+    adivi = obtengo_datos_del_asesino(adn_asesino)
+
     print
     print "Principales sospechosos: "
     for i in range(0, len(nombres)):
         print "{}.-{}: {}".format(i, nombres[i], devuelve_chungo(nombres[i]))
         personajes.setdefault(nombres[i], devuelve_chungo(nombres[i]))
 
-    adivi = obtengo_datos_del_asesino(adn_asesino)
-
-    print
-    print "|Comparando ADN|"
-    for i in range(0, len(nombres)):
-        texto_adn_personaje = ""
-        datos_sospechosos = personajes.get(nombres[i])
-        for x in range(0, len(selecciones)):
-            texto_adn_personaje = texto_adn_personaje + datos_sospechosos[selecciones[x]]
-        print "Nombre: {}.\nSu ADN es: ###|{}|###".format(nombres[i], texto_adn_personaje)
-        for n in range(0, 4):
-            sleep(1)
-            print ".",
-        if texto_adn_personaje == adivi:
-            print "\nENCONTRADO! ¡¡ES {}!!\n".format(nombres[i])
-            return
+    opcion = raw_input("\n¿Desea introducir un nuevo sospechoso?('s/n' o 'n/N')('q/Q' para salir): ")
+    if not desea_salir(opcion[0]):
+        if not elige_opcion(opcion[0]) == None:
+            if elige_opcion(opcion[0]):
+                print
+                print "Nuevo sospechoso: "
+                for t in range(0, len(selecciones)):
+                    print "Por hacer."
+            else:
+                print
+                print "|Comparando ADN|"
+                for i in range(0, len(nombres)):
+                    texto_adn_personaje = ""
+                    datos_sospechosos = personajes.get(nombres[i])
+                    for x in range(0, len(selecciones)):
+                        texto_adn_personaje = texto_adn_personaje + datos_sospechosos[selecciones[x]]
+                    print "Nombre: {}.\nSu ADN es: ###|{}|###".format(nombres[i], texto_adn_personaje)
+                    for n in range(0, 4):
+                        sleep(1)
+                        print ".",
+                    if texto_adn_personaje == adivi:
+                        print "\nENCONTRADO! ¡¡ES {}!!\n".format(nombres[i])
+                        return
+                    else:
+                        print "\n{} no es. Seguimos buscando...\n".format(nombres[i])
         else:
-            print "\n{} no es. Seguimos buscando...\n".format(nombres[i])
-            #for n in range(0, 5):
-                #print "."
-
+            print "Opción incorrecta."
+    else:
+        print
+        print "Muchas gracias por usar Forensics Soft.\n",
+        print "Saliendo de Forensics Soft.\n",
+        raw_input("Pulse una tecla para salir.")
 # ----------------------------------------------------------------------------------------------------------------------
 
 
