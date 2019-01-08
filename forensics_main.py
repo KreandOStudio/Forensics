@@ -146,6 +146,7 @@ def devuelve_selecciones(select, indice):
 
 def obtengo_datos_del_asesino(adn):
     asesino = {}
+    es_el_asesino = ""
     print "Obtengo Datos del ADN del Asesino.\n"
     print ".-Obtengo de qué género es: {}".format(busca_genero(adn))
     print ".-Obtengo el tipo de raza: es {}".format(busca_raza(adn))
@@ -159,8 +160,14 @@ def obtengo_datos_del_asesino(adn):
                 adn,
                 devuelve_selecciones(selecciones[i], 0),
                 devuelve_selecciones(selecciones[i], 1)))
+    for i in range(0, len(selecciones)):
+        datillo = devuelve_selecciones(selecciones[i], 0)
+        es_el_asesino = es_el_asesino + datillo.get(asesino.get(selecciones[i]))
+
     print "Adivinado: {}".format(asesino)
-    return asesino
+    print "Adn 'ordenado' del asesino: \n{}".format(es_el_asesino)
+    #return asesino
+    return  es_el_asesino
 
 
 def mega_obtencion_datos(adn, tipo, tipo_datos):
@@ -285,10 +292,20 @@ def main():
         print "{}.-Raza: {}".format(i, raza.keys()[i])
         print "{}.-Rostro: {}".format(i, rostro.keys()[i])
     print "Personajes: {}".format(personajes)
-
-    no_lo_es = True
-    #while no_lo_es:
-
+    print
+    print "|___________________________|"
+    for i in range(0, len(nombres)):
+        texto_adn_personaje = ""
+        jamen = personajes.get(nombres[i])
+        for x in range(0, len(selecciones)):
+            texto_adn_personaje = texto_adn_personaje + jamen[selecciones[x]]
+        print "{}###[{}]###".format(nombres[i], texto_adn_personaje)
+        if texto_adn_personaje == adivi:
+            print "ENCONTRADO! ES {}\n".format(nombres[i])
+            return
+        else:
+            print "{} no es. Seguimos buscando...\n".format(nombres[i])
+        #print "Persona {}: {}\n".format(nombres[i], personajes.get(nombres[i]))
 
 # ----------------------------------------------------------------------------------------------------------------------
 
