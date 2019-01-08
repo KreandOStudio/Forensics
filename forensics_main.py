@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import  string
+from string import find
 
 adn_asesino = "ACAAGATGCCATTGTCCCCCGGCCTCCTGCTGCTGCTGCTCTCCGGGGCCACGGCCACCGCTGCCCTGCCCCTGGAGGGTGGCCCCACCGGCCGAGACAGCGAGCATATGCAGGAAGCGGCAGGAATAAGGAAAAGCAGCCTCCTGACTTTCCTCGCTTGGTGGTTTGAGTGGACCTCCCAGGCCAGTGCCGGGCCCCTCATAGGAGAGGAAGCTCGGGAGGTGGCCAGGCGGCAGGAAGGCGCACCCCCCCAGCAATCCGCGCGCCGGGACAGAATGCCCTGCAGGAACTTCTTCTGGAAGACCTTCTCCTCCTGCAAATAAAACCTCACCCATGAATGCTCACGCAAGTTTAATTACAGACCTGAA"
 selecciones = ["genero", "raza", "pelo", "ojos", "cara"]
@@ -39,13 +39,7 @@ raza = {
 nombres = ["Eva", "Larisa", "Matej", "Miha"]
 personajes = {}
 
-eva = {
-    selecciones[0]: tipo_genero[0],     # genero:  mujer
-    selecciones[1]: tipo_raza[2],       # raza: blanc@
-    selecciones[2]: color_pelo[2],      # pelo: rubi@
-    selecciones[3]: color_ojos[0],      # ojos: azules
-    selecciones[4]: tipo_rostro[2],     # rostro: oval
-}
+
 Eva = {
     # Género femenino
     # Raza: blanco
@@ -147,7 +141,8 @@ def devuelve_selecciones(select, indice):
 def obtengo_datos_del_asesino(adn):
     asesino = {}
     es_el_asesino = ""
-    print "Obtengo Datos del ADN del Asesino.\n"
+    print
+    print "Obtengo Datos del ADN del Asesino:"
     print ".-Obtengo de qué género es: {}".format(busca_genero(adn))
     print ".-Obtengo el tipo de raza: es {}".format(busca_raza(adn))
     print ".-Obtengo el tipo de rostro: es {}".format(busca_tipo_rostro(adn))
@@ -164,9 +159,8 @@ def obtengo_datos_del_asesino(adn):
         datillo = devuelve_selecciones(selecciones[i], 0)
         es_el_asesino = es_el_asesino + datillo.get(asesino.get(selecciones[i]))
 
-    print "Adivinado: {}".format(asesino)
+    print
     print "Adn 'ordenado' del asesino: \n{}".format(es_el_asesino)
-    #return asesino
     return  es_el_asesino
 
 
@@ -176,7 +170,7 @@ def mega_obtencion_datos(adn, tipo, tipo_datos):
     x = 0
     while no_encontrado:
         if x < len(tipo_datos):
-            busca = string.find(adn, tipo[tipo_datos[x]])
+            busca = find(adn, tipo[tipo_datos[x]])
             if not busca == -1:
                 retorno_datos = tipo_datos[x]
                 no_encontrado = False
@@ -193,7 +187,7 @@ def busca_color_pelo(adn):
     x = 0
     while no_encontrado:
         if x < len(color_pelo):
-            busca = string.find(adn, pelo[color_pelo[x]])
+            busca = find(adn, pelo[color_pelo[x]])
             if not busca == -1:
                 retorno_pelo = color_pelo[x]
                 no_encontrado = False
@@ -210,7 +204,7 @@ def busca_color_ojos(adn):
     x = 0
     while no_encontrado:
         if x < len(color_ojos):
-            busca = string.find(adn, ojos[color_ojos[x]])
+            busca = find(adn, ojos[color_ojos[x]])
             if not busca == -1:
                 retorno_ojos = color_ojos[x]
                 no_encontrado = False
@@ -227,7 +221,7 @@ def busca_tipo_rostro(adn):
     x = 0
     while no_encontrado:
         if x < len(tipo_rostro):
-            busca = string.find(adn, rostro[tipo_rostro[x]])
+            busca = find(adn, rostro[tipo_rostro[x]])
             if not busca == -1:
                 retorno_rostro = tipo_rostro[x]
                 no_encontrado = False
@@ -244,7 +238,7 @@ def busca_genero(adn):
     x = 0
     while no_encontrado:
         if x < len(tipo_genero):
-            busca = string.find(adn, genero[tipo_genero[x]])
+            busca = find(adn, genero[tipo_genero[x]])
             if not busca == -1:
                 retorno_genero = tipo_genero[x]
                 no_encontrado = False
@@ -261,7 +255,7 @@ def busca_raza(adn):
     x = 0
     while no_encontrado:
         if x < len(tipo_raza):
-            busca = string.find(adn, raza[tipo_raza[x]])
+            busca = find(adn, raza[tipo_raza[x]])
             if not busca == -1:
                 retorno_raza = tipo_raza[x]
                 no_encontrado = False
@@ -273,39 +267,30 @@ def busca_raza(adn):
 
 
 def main():
-    loco = {}
-    print "Código Principal Main."
+    print
+    print "Bienvenidos a Forensics Soft. Aplicación de comparación de ADN's. ¡Encontramos al culpable!"
 
-    adivi = obtengo_datos_del_asesino(adn_asesino)
-
+    print
+    print "Principales sospechosos: "
     for i in range(0, len(nombres)):
         print "{}.-{}: {}".format(i, nombres[i], devuelve_chungo(nombres[i]))
         personajes.setdefault(nombres[i], devuelve_chungo(nombres[i]))
 
-    atontao = personajes.keys()[3]
-    print atontao
-    print "Eva modificado: {}".format(eva)
-    print "RAZA:"
-    for i in range(0, len(raza.keys())):
-        print "{}.-{}".format(i, tipo_raza[i])
-    for i in range(0, len(raza.keys())):
-        print "{}.-Raza: {}".format(i, raza.keys()[i])
-        print "{}.-Rostro: {}".format(i, rostro.keys()[i])
-    print "Personajes: {}".format(personajes)
+    adivi = obtengo_datos_del_asesino(adn_asesino)
+
     print
-    print "|___________________________|"
+    print "|Comparando ADN|"
     for i in range(0, len(nombres)):
         texto_adn_personaje = ""
-        jamen = personajes.get(nombres[i])
+        datos_sospechosos = personajes.get(nombres[i])
         for x in range(0, len(selecciones)):
-            texto_adn_personaje = texto_adn_personaje + jamen[selecciones[x]]
+            texto_adn_personaje = texto_adn_personaje + datos_sospechosos[selecciones[x]]
         print "{}###[{}]###".format(nombres[i], texto_adn_personaje)
         if texto_adn_personaje == adivi:
-            print "ENCONTRADO! ES {}\n".format(nombres[i])
+            print "ENCONTRADO! ¡¡ES {}!!\n".format(nombres[i])
             return
         else:
             print "{} no es. Seguimos buscando...\n".format(nombres[i])
-        #print "Persona {}: {}\n".format(nombres[i], personajes.get(nombres[i]))
 
 # ----------------------------------------------------------------------------------------------------------------------
 
