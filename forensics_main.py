@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from string import find
+from time import sleep
 
 adn_asesino = "ACAAGATGCCATTGTCCCCCGGCCTCCTGCTGCTGCTGCTCTCCGGGGCCACGGCCACCGCTGCCCTGCCCCTGGAGGGTGGCCCCACCGGCCGAGACAGCGAGCATATGCAGGAAGCGGCAGGAATAAGGAAAAGCAGCCTCCTGACTTTCCTCGCTTGGTGGTTTGAGTGGACCTCCCAGGCCAGTGCCGGGCCCCTCATAGGAGAGGAAGCTCGGGAGGTGGCCAGGCGGCAGGAAGGCGCACCCCCCCAGCAATCCGCGCGCCGGGACAGAATGCCCTGCAGGAACTTCTTCTGGAAGACCTTCTCCTCCTGCAAATAAAACCTCACCCATGAATGCTCACGCAAGTTTAATTACAGACCTGAA"
 selecciones = ["genero", "raza", "pelo", "ojos", "cara"]
@@ -143,6 +144,7 @@ def obtengo_datos_del_asesino(adn):
     es_el_asesino = ""
     print
     print "Obtengo Datos del ADN del Asesino:"
+    print "ADN encontrado 'desordenado':\n###|{}|###".format(adn)
     print ".-Obtengo de qué género es: {}".format(busca_genero(adn))
     print ".-Obtengo el tipo de raza: es {}".format(busca_raza(adn))
     print ".-Obtengo el tipo de rostro: es {}".format(busca_tipo_rostro(adn))
@@ -160,7 +162,7 @@ def obtengo_datos_del_asesino(adn):
         es_el_asesino = es_el_asesino + datillo.get(asesino.get(selecciones[i]))
 
     print
-    print "Adn 'ordenado' del asesino: \n{}".format(es_el_asesino)
+    print "Adn 'ordenado' del asesino: \n###|{}|###".format(es_el_asesino)
     return  es_el_asesino
 
 
@@ -285,12 +287,17 @@ def main():
         datos_sospechosos = personajes.get(nombres[i])
         for x in range(0, len(selecciones)):
             texto_adn_personaje = texto_adn_personaje + datos_sospechosos[selecciones[x]]
-        print "{}###[{}]###".format(nombres[i], texto_adn_personaje)
+        print "Nombre: {}.\nSu ADN es: ###|{}|###".format(nombres[i], texto_adn_personaje)
+        for n in range(0, 4):
+            sleep(1)
+            print ".",
         if texto_adn_personaje == adivi:
-            print "ENCONTRADO! ¡¡ES {}!!\n".format(nombres[i])
+            print "\nENCONTRADO! ¡¡ES {}!!\n".format(nombres[i])
             return
         else:
-            print "{} no es. Seguimos buscando...\n".format(nombres[i])
+            print "\n{} no es. Seguimos buscando...\n".format(nombres[i])
+            #for n in range(0, 5):
+                #print "."
 
 # ----------------------------------------------------------------------------------------------------------------------
 
