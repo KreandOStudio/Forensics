@@ -40,11 +40,11 @@ nombres = ["Eva", "Larisa", "Matej", "Miha"]
 personajes = {}
 
 eva = {
-    selecciones[0]: genero.keys()[0],   #V genero:  mujer
-    selecciones[1]: raza.keys()[0],     # raza: blanc@
-    selecciones[2]: pelo.keys()[2],     # pelo: rubi@
-    selecciones[3]: ojos.keys()[0],     #V ojos: azules
-    selecciones[4]: rostro.keys()[2],   # rostro: oval
+    selecciones[0]: tipo_genero[0],     # genero:  mujer
+    selecciones[1]: tipo_raza[2],       # raza: blanc@
+    selecciones[2]: color_pelo[2],      # pelo: rubi@
+    selecciones[3]: color_ojos[0],      # ojos: azules
+    selecciones[4]: tipo_rostro[2],     # rostro: oval
 }
 Eva = {
     # Género femenino
@@ -283,6 +283,7 @@ def main():
         print "{}.-{}".format(i, tipo_raza[i])
     for i in range(0, len(raza.keys())):
         print "{}.-Raza: {}".format(i, raza.keys()[i])
+        print "{}.-Rostro: {}".format(i, rostro.keys()[i])
     print "Personajes: {}".format(personajes)
 
     no_lo_es = True
