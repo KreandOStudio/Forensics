@@ -320,7 +320,10 @@ def main():
                         print "\nENCONTRADO! ¡¡ES {}!!\n".format(nombres[i])
                         return
                     else:
-                        print "\n{} no es. Seguimos buscando...\n".format(nombres[i])
+                        if len(nombres)-1 <= i:
+                            print "\n{} no es. No lo hemos encontrado.".format(nombres[i])
+                        else:
+                            print "\n{} no es. Seguimos buscando...\n".format(nombres[i])
         else:
             print "Opción incorrecta."
     else:
